@@ -4,8 +4,7 @@ import {
   HydrationBoundary,
   dehydrate,
 } from "@tanstack/react-query";
-import { getNotes } from "@/lib/api";
-import { NoteTag } from "@/types/note";
+import { fetchNotes } from "@/lib/api/serverApi";
 import NotesClient from "./Notes.client";
 import { Metadata } from "next";
 
@@ -15,7 +14,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const tag = slug?.[0] === "all" ? undefined : (slug?.[0] as NoteTag);
+  const tag = slug?.[0] === "all" ? undefined : slug?.[0];
   return {
     title: `Note: ${tag ?? "all"}`,
     description: `Note for filter on ${tag ?? "all"}`,
@@ -39,12 +38,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const NoteDetails = async ({ params }: Props) => {
   const { slug } = await params;
-  const tag = slug?.[0] === "all" ? undefined : (slug?.[0] as NoteTag);
+  const tag = slug?.[0] === "all" ? undefined : slug?.[0];
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
     queryKey: ["note", tag],
-    queryFn: () => getNotes(tag),
+    queryFn: () => fetchNotes({ tag }),
   });
 
   return (

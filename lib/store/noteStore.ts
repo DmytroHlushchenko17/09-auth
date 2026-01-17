@@ -1,5 +1,5 @@
+import { NoteCreate } from "@/types/note";
 import { create } from "zustand";
-import { NoteCreate } from "../api";
 import { persist } from "zustand/middleware";
 
 type NoteDraftStore = {
@@ -14,7 +14,7 @@ const initialDraft: NoteCreate = {
   tag: "Todo",
 };
 
-export const useNoteDraftStore = create<NoteDraftStore>()(
+const useNoteDraftStore = create<NoteDraftStore>()(
   persist(
     (set) => ({
       draft: initialDraft,
@@ -29,3 +29,5 @@ export const useNoteDraftStore = create<NoteDraftStore>()(
     }
   )
 );
+
+export default useNoteDraftStore;

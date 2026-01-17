@@ -1,10 +1,11 @@
 "use client";
 import css from "./NoteForm.module.css";
-import { type NoteCreate, createNote } from "@/lib/api";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useNoteDraftStore } from "@/lib/store/noteStore";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { createNote } from "@/lib/api/clientApi";
+import { NoteCreate } from "@/types/note";
+import useNoteDraftStore from "@/lib/store/noteStore";
 
 const NoteForm = () => {
   const NotesArrey = ["Todo", "Work", "Personal", "Meeting", "Shopping"];
