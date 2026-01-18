@@ -30,8 +30,8 @@ const NoteList = ({ notes }: NoteListProps) => {
   return (
     <ul className={css.list}>
       {notes.map((note) => (
-        <li key={note.id} className={css.listItem}>
-          <Link href={`/notes/${note.id}`}>
+        <li key={note._id} className={css.listItem}>
+          <Link href={`/notes/${note._id}`}>
             <h2 className={css.title}>{note.title}</h2>
             <p className={css.content}>{note.content}</p>
           </Link>
@@ -40,7 +40,7 @@ const NoteList = ({ notes }: NoteListProps) => {
             <span className={css.tag}>{note.tag}</span>
             <button
               className={css.button}
-              onClick={() => deleteMutation.mutate(note.id)}
+              onClick={() => deleteMutation.mutate(note._id)}
               disabled={deleteMutation.isPending}
             >
               {deleteMutation.isPending ? "Deleting..." : "Delete"}

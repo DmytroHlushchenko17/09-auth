@@ -30,7 +30,7 @@ const NoteForm = () => {
 
   const handleSubmit = (formData: FormData) => {
     const title = formData.get("title") as string;
-    const values = Object.fromEntries(formData) as NoteCreate;
+    const values = Object.fromEntries(formData) as unknown as NoteCreate;
 
     if (title.trim()) {
       mutate(values);

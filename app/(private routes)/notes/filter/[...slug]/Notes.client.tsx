@@ -8,18 +8,12 @@ import { useDebounce } from "use-debounce";
 import Loader from "@/components/Loader/Loader";
 import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
 import { fetchNotes } from "@/lib/api/serverApi";
-import type {
-  FetchNotesParams,
-  FetchNotesResponse,
-  NoteTag,
-} from "@/types/note";
+import type { FetchNotesParams, FetchNotesResponse } from "@/types/note";
 import NoteList from "@/components/NoteList/NoteList";
 import Link from "next/link";
 
-const PER_PAGE = 12;
-
 type Props = {
-  tag?: NoteTag;
+  tag?: string;
 };
 
 export default function NotesClient({ tag }: Props) {
@@ -29,7 +23,6 @@ export default function NotesClient({ tag }: Props) {
 
   const queryParams: FetchNotesParams = {
     page,
-    perPage: PER_PAGE,
     search: debouncedSearchQuery,
     tag,
   };
@@ -46,7 +39,7 @@ export default function NotesClient({ tag }: Props) {
   };
 
   const notes = data?.notes || [];
-  const totalPages = data?.totalPages || 0;
+  const totalPages = data?.perPage || 0;
 
   return (
     <div className={css.app}>

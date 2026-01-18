@@ -2,6 +2,25 @@ import Image from "next/image";
 import css from "./ProfilePage.module.css";
 import Link from "next/link";
 import { getMe } from "@/lib/api/serverApi";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Profile User",
+  description: "Profile User",
+  openGraph: {
+    title: "Profile User",
+    description: "Profile User",
+    url: "",
+    images: [
+      {
+        url: "https://ac.goit.global/fullstack/react/default-avatar.jpg",
+        width: 1200,
+        height: 630,
+        alt: "User avatar",
+      },
+    ],
+  },
+};
 
 export default async function Profile() {
   const user = await getMe();

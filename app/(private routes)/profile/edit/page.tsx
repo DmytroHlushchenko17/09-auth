@@ -4,29 +4,35 @@ import css from "./EditProfilePage.module.css";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { getMe, updateMe } from "@/lib/api/clientApi";
-import { User } from "@/types/user";
 import { useRouter } from "next/navigation";
+import { User } from "@/types/user";
 
 export default function EditProfile() {
   const [user, setUser] = useState<User | null>(null);
+  const [username, setUserName] = useState("");
   const router = useRouter();
 
   useEffect(() => {
-    getMe().then((data) => {
-      setUser(data);
+    getMe().then((userData) => {
+      setUser(userData);
+      setUserName(userData.username ?? "");
     });
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (user) setUser({ ...user, username: event.target.value });
+    setUserName(event.target.value);
   };
-  if (!user) return null;
 
   const handleSaveUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await updateMe(user);
+    await updateMe({ username });
     router.push("/profile");
   };
+
+  if (!user) {
+    return <p>Loading</p>;
+  }
+
   return (
     <main className={css.mainContent}>
       <div className={css.profileCard}>
@@ -47,12 +53,12 @@ export default function EditProfile() {
               id="username"
               type="text"
               className={css.input}
-              value={user.username}
+              value={username}
               onChange={handleChange}
             />
           </div>
 
-          <p>Email: {user.email}</p>
+          <p>Email: {user?.email}</p>
 
           <div className={css.actions}>
             <button type="submit" className={css.saveButton}>

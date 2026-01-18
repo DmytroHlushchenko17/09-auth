@@ -7,7 +7,7 @@ import {
   LoginBody,
 } from "@/types/note";
 import { api } from "./api";
-import { User } from "@/types/user";
+import { UpdateUser, User } from "@/types/user";
 
 export const login = async (data: LoginBody) => {
   const res = await api.post<AuthResponse>("/auth/login", data);
@@ -54,7 +54,7 @@ export const getMe = async () => {
   return res.data;
 };
 
-export const updateMe = async (userData: Partial<User>) => {
+export const updateMe = async (userData: UpdateUser) => {
   const res = await api.patch<User>("/users/me", userData);
   return res.data;
 };
