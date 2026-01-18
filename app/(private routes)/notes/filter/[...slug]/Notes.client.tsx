@@ -15,6 +15,7 @@ import Link from "next/link";
 type Props = {
   tag?: string;
 };
+const PER_PAGE = 12;
 
 export default function NotesClient({ tag }: Props) {
   const [search, setSearch] = useState("");
@@ -25,6 +26,7 @@ export default function NotesClient({ tag }: Props) {
     page,
     search: debouncedSearchQuery,
     tag,
+    perPage: PER_PAGE,
   };
 
   const { data, isPending, isError } = useQuery<FetchNotesResponse>({
@@ -39,13 +41,13 @@ export default function NotesClient({ tag }: Props) {
   };
 
   const notes = data?.notes || [];
-  const totalPages = data?.page || 0;
+  const totalPages = data?.total || 0;
 
   return (
     <div className={css.app}>
       <header className={css.toolbar}>
         <SearchBox value={search} onChange={handleSearchChange} />
-        {totalPages > 1 && (
+        {data && totalPages > 1 && (
           <Pagination
             currentPage={page}
             pageCount={totalPages}

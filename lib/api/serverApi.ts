@@ -4,7 +4,7 @@ import { api } from "./api";
 import { FetchNotesParams, FetchNotesResponse, Note } from "@/types/note";
 import { User } from "@/types/user";
 
-export const fetchNotes = async (params: FetchNotesParams = {}) => {
+export const fetchNotes = async (params: FetchNotesParams) => {
   const cookieStore = await cookies();
   const res = await api.get<FetchNotesResponse>("/notes", {
     params,

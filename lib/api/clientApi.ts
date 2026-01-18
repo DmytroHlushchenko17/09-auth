@@ -19,7 +19,7 @@ export const register = async (data: LoginBody) => {
   return res.data;
 };
 
-export const fetchNotes = async (params: FetchNotesParams = {}) => {
+export const fetchNotes = async (params: FetchNotesParams) => {
   const res = await api.get<FetchNotesResponse>("/notes", { params });
   return res.data;
 };
