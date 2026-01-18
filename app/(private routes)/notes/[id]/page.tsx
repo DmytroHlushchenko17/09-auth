@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: `Note details of filtered ${note._id}`,
       description: `Note details of filtered ${note._id}`,
-      url: `https://08-zustand-livid-sigma.vercel.app/notes/${note._id}`,
+      url: `https://09-auth-indol-seven.vercel.app/notes/${note._id}`,
       images: [
         {
           url: "https://ac.goit.global/fullstack/react/og-meta.jpg",

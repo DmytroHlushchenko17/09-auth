@@ -10,10 +10,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Profile User",
     description: "Profile User",
-    url: "",
+    url: "https://09-auth-indol-seven.vercel.app/profile",
     images: [
       {
-        url: "https://ac.goit.global/fullstack/react/default-avatar.jpg",
+        url: "https://ac.goit.global/fullstack/react/og-meta.jpg",
         width: 1200,
         height: 630,
         alt: "User avatar",
