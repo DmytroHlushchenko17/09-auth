@@ -1,16 +1,17 @@
 "use client";
-import Link from "next/link";
 import css from "./EditProfilePage.module.css";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { getMe, updateMe } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
 import { User } from "@/types/user";
+import useAuthStore from "@/lib/store/authStore";
 
 export default function EditProfile() {
   const [user, setUser] = useState<User | null>(null);
-  const [username, setUserName] = useState("");
+   const [username, setUserName] = useState("");
   const router = useRouter();
+  const setUserGlobal = useAuthStore((s) => s.setUser);
 
   useEffect(() => {
     getMe().then((userData) => {
@@ -25,7 +26,8 @@ export default function EditProfile() {
 
   const handleSaveUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await updateMe({ username });
+    const updatedUser = await updateMe({ username });
+    setUserGlobal(updatedUser);
     router.push("/profile");
   };
 
@@ -64,9 +66,9 @@ export default function EditProfile() {
             <button type="submit" className={css.saveButton}>
               Save
             </button>
-            <Link href="/profile" className={css.cancelButton}>
+            <button type="button" onClick={() => router.back()} className={css.cancelButton}>
               Cancel
-            </Link>
+            </button>
           </div>
         </form>
       </div>

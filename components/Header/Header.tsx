@@ -5,7 +5,7 @@ import AuthNavigation from "../AuthNavigation/AuthNavigation";
 import useAuthStore from "@/lib/store/authStore";
 
 export default function Header() {
-  const isAuth = useAuthStore((s) => s.isAuth);
+  const { user, isAuth } = useAuthStore();
   return (
     <header className={css.header}>
       <Link href="/" aria-label="Home">
@@ -13,7 +13,7 @@ export default function Header() {
       </Link>
       <nav aria-label="Main Navigation">
         <ul className={css.navigation}>
-          <AuthNavigation />
+          <AuthNavigation user={user} />
           <li>
             <Link href="/">Home</Link>
           </li>

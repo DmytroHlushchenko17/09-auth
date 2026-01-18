@@ -3,7 +3,13 @@ import css from "./AuthNavigation.module.css";
 import useAuthStore from "@/lib/store/authStore";
 import { logout } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
-export default function AuthNavigation() {
+import { User } from "@/types/user";
+
+interface Props {
+  user: User | null;
+}
+
+export default function AuthNavigation({ user }: Props) {
   const isAuth = useAuthStore((s) => s.isAuth);
   const clearUserInfo = useAuthStore((s) => s.clearUser);
   const router = useRouter();
@@ -11,7 +17,7 @@ export default function AuthNavigation() {
   const handleLogout = async () => {
     await logout();
     clearUserInfo();
-    router.push("/");
+    router.push("/sign-in");
   };
   return (
     <>
@@ -24,13 +30,13 @@ export default function AuthNavigation() {
       )}
       {isAuth && (
         <li className={css.navigationItem}>
-          <p className={css.userEmail}>User email</p>
+          <p className={css.userEmail}>{user?.email || user?.username}</p>
           <button className={css.logoutButton} onClick={handleLogout}>
             Logout
           </button>
         </li>
       )}
-      {isAuth && (
+      {!isAuth && (
         <li className={css.navigationItem}>
           <Link href="/sign-in" prefetch={false} className={css.navigationLink}>
             Login

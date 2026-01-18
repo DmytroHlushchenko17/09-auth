@@ -21,7 +21,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     fetchUser();
-  });
+  }, [setUser, clearUserInfo]);
 
   return children;
 };

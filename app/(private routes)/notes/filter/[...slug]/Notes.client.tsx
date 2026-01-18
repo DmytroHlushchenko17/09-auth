@@ -7,7 +7,7 @@ import Pagination from "@/components/Pagination/Pagination";
 import { useDebounce } from "use-debounce";
 import Loader from "@/components/Loader/Loader";
 import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
-import { fetchNotes } from "@/lib/api/serverApi";
+import { fetchNotes } from "@/lib/api/clientApi";
 import type { FetchNotesParams, FetchNotesResponse } from "@/types/note";
 import NoteList from "@/components/NoteList/NoteList";
 import Link from "next/link";

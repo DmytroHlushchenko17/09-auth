@@ -52,5 +52,5 @@ export const checkSession = async () => {
       Cookie: cookieStore.toString(),
     },
   });
-  return res.data;
+  return res;
 };

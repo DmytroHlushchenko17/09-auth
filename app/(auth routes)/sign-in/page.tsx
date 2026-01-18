@@ -3,10 +3,12 @@ import css from "./SignInPage.module.css";
 import { useRouter } from "next/navigation";
 import { login } from "@/lib/api/clientApi";
 import useAuthStore from "@/lib/store/authStore";
+import { useState } from "react";
 
 export default function SignInPage() {
   const router = useRouter();
   const setUser = useAuthStore((s) => s.setUser);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,10 +17,16 @@ export default function SignInPage() {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     const data = { email, password };
-    const res = await login(data);
-    setUser(res.user);
-    router.push("/profile");
-    formElem.reset();
+
+    try {
+      setError(null);
+      const res = await login(data);
+      setUser(res.user);
+      router.push("/profile");
+      formElem.reset();
+    } catch {
+      setError("Data entry error ! ! !");
+    }
   };
 
   return (
@@ -50,7 +58,7 @@ export default function SignInPage() {
             Log in
           </button>
         </div>
-        {!setUser && <p className={css.error}>Error</p>}
+        {error && <p className={css.error}>{error}</p>}
       </form>
     </main>
   );
