@@ -39,7 +39,7 @@ export default function NotesClient({ tag }: Props) {
   };
 
   const notes = data?.notes || [];
-  const totalPages = data?.perPage || 0;
+  const totalPages = data?.page || 0;
 
   return (
     <div className={css.app}>
