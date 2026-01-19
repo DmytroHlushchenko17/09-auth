@@ -39,9 +39,9 @@ export default function NotesClient({ tag }: Props) {
     setSearch(value);
     setPage(1);
   };
-
+  console.log(data);
   const notes = data?.notes || [];
-  const totalPages = data?.total || 0;
+  const totalPages = data?.totalPages || 0;
 
   return (
     <div className={css.app}>

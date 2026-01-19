@@ -15,12 +15,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const note = await fetchNoteById(id);
   return {
-    title: `Note: ${note._id}`,
-    description: `Note details of filtered ${note._id}`,
+    title: `Note: ${note.id}`,
+    description: `Note details of filtered ${note.id}`,
     openGraph: {
-      title: `Note details of filtered ${note._id}`,
-      description: `Note details of filtered ${note._id}`,
-      url: `https://09-auth-indol-seven.vercel.app/notes/${note._id}`,
+      title: `Note details of filtered ${note.id}`,
+      description: `Note details of filtered ${note.id}`,
+      url: `https://09-auth-indol-seven.vercel.app/notes/${note.id}`,
       images: [
         {
           url: "https://ac.goit.global/fullstack/react/og-meta.jpg",

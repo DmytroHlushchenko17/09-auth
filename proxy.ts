@@ -21,7 +21,7 @@ export async function proxy(request: NextRequest) {
   }
 
   if (isPrivateRoute) {
-    if (refreshToken || accessToken) {
+    if (accessToken) {
       return NextResponse.next();
     }
 

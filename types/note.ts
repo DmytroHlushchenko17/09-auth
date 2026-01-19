@@ -12,7 +12,7 @@ export interface NoteCreate {
 }
 
 export interface Note extends NoteCreate {
-  _id: string;
+  id: string;
   userId: string;
   createdAt: string;
   updatedAt: string;
@@ -32,7 +32,5 @@ export interface FetchNotesParams {
 
 export interface FetchNotesResponse {
   notes: Note[];
-  total: number;
-  page: number;
-  perPage: number;
+  totalPages: number;
 }
